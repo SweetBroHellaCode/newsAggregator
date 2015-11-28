@@ -33,12 +33,7 @@ public class Article {
     private String text;
     @NotNull
     private String crawled;
-    @NotNull
-    private String[] persons;
-    @NotNull
-    private String[] locations;
-    @NotNull
-    private String[] organizations;
+
 
     /**
      * Constructor
@@ -51,11 +46,8 @@ public class Article {
      * @param title
      * @param text
      * @param crawled
-     * @param persons
-     * @param locations
-     * @param organizations
      */
-    public Article(String name, String author, String published, String url, String source, String title, String text, String crawled, String[] persons, String[] locations, String[] organizations) {
+    public Article(String name, String author, String published, String url, String source, String title, String text, String crawled) {
         this.name = name;
         this.author = author;
         this.published = published;
@@ -64,11 +56,7 @@ public class Article {
         this.title = title;
         this.text = text;
         this.crawled = crawled;
-        this.persons = persons;
-        this.locations = locations;
-        this.organizations = organizations;
     }
-
 
     /**
      * Get id
@@ -232,57 +220,5 @@ public class Article {
         this.crawled = crawled;
     }
 
-    /**
-     * Get persons
-     *
-     * @return
-     */
-    public String[] getPersons() {
-        return persons;
-    }
 
-    /**
-     * Set persons
-     *
-     * @param persons
-     */
-    public void setPersons(String[] persons) {
-        this.persons = persons;
-    }
-
-    /**
-     * Get location
-     *
-     * @return
-     */
-    public String[] getLocations() {
-        return locations;
-    }
-
-    /**
-     * Set location
-     *
-     * @param locations
-     */
-    public void setLocations(String[] locations) {
-        this.locations = locations;
-    }
-
-    /**
-     * Get organizations
-     *
-     * @return
-     */
-    public String[] getOrganizations() {
-        return organizations;
-    }
-
-    /**
-     * Set organizations
-     *
-     * @param organizations
-     */
-    public void setOrganizations(String[] organizations) {
-        this.organizations = organizations;
-    }
 }
