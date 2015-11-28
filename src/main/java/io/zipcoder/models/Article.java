@@ -57,6 +57,11 @@ public class Article {
     }
 
     /**
+     * Default constructor
+     */
+    public Article(){}
+
+    /**
      * Get id
      *
      * @return
