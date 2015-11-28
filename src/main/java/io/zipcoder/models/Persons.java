@@ -25,9 +25,15 @@ public class Persons {
      * @param article_id
      * @param name
      */
-    Persons(int article_id, String name) {
+    public Persons(int article_id, String name) {
         this.article_id = article_id;
         this.name = name;
+    }
+
+    /**
+     * Default Constructor
+     */
+    public Persons() {
     }
 
     /**

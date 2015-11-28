@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
  * Created by emaron on 11/27/15.
  */
 @Entity
-@Table(name="organization")
+@Table(name = "organization")
 public class Organization {
 
     //Table values
@@ -25,9 +25,15 @@ public class Organization {
      * @param article_id
      * @param name
      */
-    Organization(int article_id, String name) {
+    public Organization(int article_id, String name) {
         this.article_id = article_id;
         this.name = name;
+    }
+
+    /**
+     * Default Constructor
+     */
+    public Organization() {
     }
 
     /**

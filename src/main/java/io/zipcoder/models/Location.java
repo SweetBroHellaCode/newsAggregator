@@ -25,10 +25,15 @@ public class Location {
      * @param article_id
      * @param name
      */
-    Location(int article_id, String name) {
+   public Location(int article_id, String name) {
         this.article_id = article_id;
         this.name = name;
     }
+
+    /**
+     * Default Constructor
+     */
+    public Location(){}
 
     /**
      * Get id
