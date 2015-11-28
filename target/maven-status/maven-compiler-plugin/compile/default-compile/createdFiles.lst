@@ -1,0 +1,11 @@
+io/zipcoder/SimpleCORSFilter.class
+io/zipcoder/models/OrganizationDAO.class
+io/zipcoder/models/Persons.class
+io/zipcoder/models/Article.class
+io/zipcoder/NewsCrawlerApplication.class
+io/zipcoder/models/Location.class
+io/zipcoder/models/ArticleDAO.class
+io/zipcoder/controllers/ArticleController.class
+io/zipcoder/models/LocationDAO.class
+io/zipcoder/models/Organization.class
+io/zipcoder/models/PersonsDAO.class

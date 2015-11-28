@@ -1,9 +1,6 @@
 package io.zipcoder.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
@@ -11,6 +8,7 @@ import javax.validation.constraints.NotNull;
  * Created by emaron on 11/25/15.
  */
 @Entity
+@Table(name= "article")
 public class Article {
 
     // Table values
