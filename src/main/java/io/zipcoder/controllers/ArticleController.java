@@ -55,14 +55,14 @@ public class ArticleController {
         } else {
             return null;
         }
-        return  newArticle;
+        return newArticle;
     }
 
     @ResponseBody
     @RequestMapping(value = "/article/delete", method = RequestMethod.GET)
-    public void deleteArticle(int id){
+    public void deleteArticle(int id) {
         Article tempArticle = articleDAO.findOne(id);
-        if(tempArticle != null) {
+        if (tempArticle != null) {
             articleDAO.delete(tempArticle);
         }
     }

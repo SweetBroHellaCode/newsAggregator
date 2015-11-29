@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface ArticleDAO extends CrudRepository<Article, Integer> {
 
+    Article findByUrl(String url);
 }

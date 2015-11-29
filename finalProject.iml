@@ -76,5 +76,19 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.2.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.mashape.unirest:unirest-java:1.4.7" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpasyncclient:4.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore-nio:4.4.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20140107" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-bus:2.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.goldmansachs:gs-collections:5.1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.goldmansachs:gs-collections-api:5.1.0" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:2.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.4" level="project" />
   </component>
 </module>

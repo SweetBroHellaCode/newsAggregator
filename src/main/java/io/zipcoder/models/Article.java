@@ -58,8 +58,17 @@ public class Article {
 
     /**
      * Default constructor
+     * @param test
+     * @param s
+     * @param test1
+     * @param s1
+     * @param test2
+     * @param s2
+     * @param test3
+     * @param s3
+     * @param test4
      */
-    public Article(){}
+    public Article(String test, String s, String test1, String s1, String test2, String s2, String test3, String s3, String test4){}
 
     /**
      * Get id
