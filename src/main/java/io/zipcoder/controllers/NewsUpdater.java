@@ -38,14 +38,18 @@ public class NewsUpdater {
     @Autowired
     PersonsDAO personsDAO;
 
-    @Scheduled(fixedRate = 1000 * 60 * 2)
+    //@Scheduled(fixedRate = 1000 * 60 * 2)
     public void updateCNN() {
 
         //Objects to be created from response
         Article newsArticle;
+        ArticleController articleController = new ArticleController();
         Location newsArticleLocations;
+        LocationController locationController = new LocationController();
         Organization newsArticleOrganizations;
+        OrganizationController organizationController = new OrganizationController();
         Persons newsArticlePersons;
+        PersonsController personsController = new PersonsController();
 
         try {
             //Go to CNN and pull all articles listed as news
@@ -80,17 +84,33 @@ public class NewsUpdater {
                 //If text is not null and is not
                 //already present in database, then
                 //save to database
+                if (articleDAO.findByUrl(newsArticle.getUrl()) == null) {
+                    articleController.createArticle(
+                            newsCNNArticles.getJSONObject(i).get("title").toString(),
+                            newsCNNArticles.getJSONObject(i).get("author").toString(),
+                            newsCNNArticles.getJSONObject(i).get("published").toString(),
+                            newsCNNArticles.getJSONObject(i).get("url").toString(),
+                            newsCNNArticles.getJSONObject(i).getJSONObject("thread").get("site_full").toString(),
+                            newsCNNArticles.getJSONObject(i).get("title").toString(),
+                            newsCNNArticles.getJSONObject(i).get("text").toString(),
+                            newsCNNArticles.getJSONObject(i).get("crawled").toString()
+                    );
+                } else {
+                    System.out.println("Duplicate value detected!");
+                }
 
 
                 //Make new Location article if applicable
                 if (newsCNNArticles.getJSONObject(i).getJSONArray("locations").length() != 0 && newsCNNArticles.getJSONObject(i).getJSONArray("locations") != null) {
                     for (int j = 0; j < newsCNNArticles.getJSONObject(i).getJSONArray("locations").length(); j++) {
-                        newsArticleLocations = new Location(
-                                articleDAO.findByUrl(newsArticle.getUrl()).getId(),
-                                newsCNNArticles.getJSONObject(i).getJSONArray("locations").get(i).toString()
-                        );
+                        if ( articleDAO.findByUrl(newsArticle.getUrl()) == null) {
+                            newsArticleLocations = new Location(
+                                    articleDAO.findByUrl(newsArticle.getUrl()).getId(),
+                                    newsCNNArticles.getJSONObject(i).getJSONArray("locations").get(i).toString()
+                            );
 
-                        System.out.println(newsArticleLocations);
+                            System.out.println(newsArticleLocations);
+                        }
                     }
                 }
 
