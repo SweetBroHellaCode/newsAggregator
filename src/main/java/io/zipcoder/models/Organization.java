@@ -15,7 +15,8 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotNull
-    private int article_id;
+    @Column(name="article_id")
+    private int articleId;
     @NotNull
     private String name;
 
@@ -26,7 +27,7 @@ public class Organization {
      * @param name
      */
     public Organization(int article_id, String name) {
-        this.article_id = article_id;
+        this.articleId = article_id;
         this.name = name;
     }
 
@@ -60,8 +61,8 @@ public class Organization {
      *
      * @return article id
      */
-    public int getArticle_id() {
-        return article_id;
+    public int getArticleId() {
+        return articleId;
     }
 
     /**
@@ -69,8 +70,8 @@ public class Organization {
      *
      * @param article_id sets the organizations id
      */
-    public void setArticle_id(int article_id) {
-        this.article_id = article_id;
+    public void setArticleId(int article_id) {
+        this.articleId = article_id;
     }
 
     /**

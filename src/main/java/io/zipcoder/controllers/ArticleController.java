@@ -21,10 +21,8 @@ public class ArticleController {
 
     @ResponseBody
     @RequestMapping(value = "/article/create", method = RequestMethod.GET)
-    public void createArticle(String name, String author, String published, String url, String source, String title, String text, String crawled) {
-        Article newArticle = new Article(name, author, published, url, source, title, text, crawled);
+    public void createArticle(Article newArticle) {
         articleDAO.save(newArticle);
-
     }
 
     @ResponseBody

@@ -1,33 +1,22 @@
-package io.zipcoder.controllers;
+package io.zipcoder.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.zipcoder.models.*;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import reactor.bus.Event;
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.function.Consumer;
 
 
 /**
  * Created by emaron on 11/29/15.
  */
 @Service
-public class NewsUpdater {
+public class CNNNewsUpdater {
     //Controllers for each new object
     @Autowired
     ArticleDAO articleDAO;
@@ -38,18 +27,15 @@ public class NewsUpdater {
     @Autowired
     PersonsDAO personsDAO;
 
-    //@Scheduled(fixedRate = 1000 * 60 * 2)
+    @Scheduled(fixedRate = 1000 * 60 * 60)
     public void updateCNN() {
 
         //Objects to be created from response
         Article newsArticle;
-        ArticleController articleController = new ArticleController();
         Location newsArticleLocations;
-        LocationController locationController = new LocationController();
         Organization newsArticleOrganizations;
-        OrganizationController organizationController = new OrganizationController();
         Persons newsArticlePersons;
-        PersonsController personsController = new PersonsController();
+
 
         try {
             //Go to CNN and pull all articles listed as news
@@ -79,41 +65,82 @@ public class NewsUpdater {
                         newsCNNArticles.getJSONObject(i).get("crawled").toString()
                 );
 
-                System.out.println(newsArticle.getText());
+                // System.out.println(newsArticle.getText());
 
                 //If text is not null and is not
                 //already present in database, then
                 //save to database
                 if (articleDAO.findByUrl(newsArticle.getUrl()) == null) {
-                    articleController.createArticle(
-                            newsCNNArticles.getJSONObject(i).get("title").toString(),
-                            newsCNNArticles.getJSONObject(i).get("author").toString(),
-                            newsCNNArticles.getJSONObject(i).get("published").toString(),
-                            newsCNNArticles.getJSONObject(i).get("url").toString(),
-                            newsCNNArticles.getJSONObject(i).getJSONObject("thread").get("site_full").toString(),
-                            newsCNNArticles.getJSONObject(i).get("title").toString(),
-                            newsCNNArticles.getJSONObject(i).get("text").toString(),
-                            newsCNNArticles.getJSONObject(i).get("crawled").toString()
-                    );
+                    System.out.println(newsArticle.getName());
+                    articleDAO.save(newsArticle);
                 } else {
                     System.out.println("Duplicate value detected!");
                 }
 
 
                 //Make new Location article if applicable
-                if (newsCNNArticles.getJSONObject(i).getJSONArray("locations").length() != 0 && newsCNNArticles.getJSONObject(i).getJSONArray("locations") != null) {
+                System.out.println("Location: ");
+                System.out.println(newsCNNArticles.getJSONObject(i).getJSONArray("locations").length());
+
+                //If a story has a location object, then
+                //for each object, see if it exists in
+                //the database to determine whether or not
+                //to add it to the database
+                if (newsCNNArticles.getJSONObject(i).getJSONArray("locations").length() != 0) {
+
                     for (int j = 0; j < newsCNNArticles.getJSONObject(i).getJSONArray("locations").length(); j++) {
-                        if ( articleDAO.findByUrl(newsArticle.getUrl()) == null) {
+                        if (locationDAO.findByArticleId(articleDAO.findByUrl(newsArticle.getUrl()).getId()) == null) {
                             newsArticleLocations = new Location(
                                     articleDAO.findByUrl(newsArticle.getUrl()).getId(),
-                                    newsCNNArticles.getJSONObject(i).getJSONArray("locations").get(i).toString()
+                                    newsCNNArticles.getJSONObject(i).getJSONArray("locations").get(j).toString()
                             );
 
-                            System.out.println(newsArticleLocations);
+                            locationDAO.save(newsArticleLocations);
+                            System.out.println(newsArticleLocations.getName());
                         }
                     }
+
                 }
 
+                //If a story has a organization object, then
+                //for each object, see if it exists in
+                //the database to determine whether or not
+                //to add it to the database
+                if (newsCNNArticles.getJSONObject(i).getJSONArray("organizations").length() != 0) {
+
+                    for (int j = 0; j < newsCNNArticles.getJSONObject(i).getJSONArray("organizations").length(); j++) {
+                        if (organizationDAO.findByArticleId(articleDAO.findByUrl(newsArticle.getUrl()).getId()) == null) {
+                            newsArticleOrganizations = new Organization(
+                                    articleDAO.findByUrl(newsArticle.getUrl()).getId(),
+                                    newsCNNArticles.getJSONObject(i).getJSONArray("organizations").get(j).toString()
+                            );
+
+                            organizationDAO.save(newsArticleOrganizations);
+                            System.out.println(newsArticleOrganizations.getName());
+                        }
+                    }
+
+                }
+
+                //If a story has a persons object, then
+                //for each object, see if it exists in
+                //the database to determine whether or not
+                //to add it to the database
+                if (newsCNNArticles.getJSONObject(i).getJSONArray("persons").length() != 0) {
+
+                    for (int j = 0; j < newsCNNArticles.getJSONObject(i).getJSONArray("persons").length(); j++) {
+                        if (personsDAO.findByArticleId(articleDAO.findByUrl(newsArticle.getUrl()).getId()) == null) {
+                            newsArticlePersons = new Persons(
+                                    articleDAO.findByUrl(newsArticle.getUrl()).getId(),
+                                    newsCNNArticles.getJSONObject(i).getJSONArray("persons").get(j).toString()
+                            );
+
+                            personsDAO.save(newsArticlePersons);
+                            System.out.println(newsArticlePersons.getName());
+                        }
+                    }
+
+                }
 
             }
         } catch (UnirestException ex) {

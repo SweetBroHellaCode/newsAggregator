@@ -39,7 +39,7 @@ public class LocationController {
             newLocation = oldLocation;
 
             newLocation.setName(name);
-            newLocation.setArticle_id(article_id);
+            newLocation.setArticleId(article_id);
 
             locationDAO.save(newLocation);
         } else {

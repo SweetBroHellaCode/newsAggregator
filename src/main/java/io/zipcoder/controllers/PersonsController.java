@@ -39,7 +39,7 @@ public class PersonsController {
             newPersons = oldPersons;
 
             newPersons.setName(name);
-            newPersons.setArticle_id(article_id);
+            newPersons.setArticleId(article_id);
 
             personsDAO.save(newPersons);
         } else {

@@ -39,7 +39,7 @@ public class OrganizationController {
             newOrganization = oldOrganization;
 
             newOrganization.setName(name);
-            newOrganization.setArticle_id(article_id);
+            newOrganization.setArticleId(article_id);
 
             organizationDAO.save(newOrganization);
         } else {

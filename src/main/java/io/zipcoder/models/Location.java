@@ -15,18 +15,19 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotNull
-    private int article_id;
+    @Column(name="article_id")
+    private int articleId;
     @NotNull
     private String name;
 
     /**
      * Constructor
      *
-     * @param article_id
+     * @param articleId
      * @param name
      */
-   public Location(int article_id, String name) {
-        this.article_id = article_id;
+   public Location(int articleId, String name) {
+        this.articleId = articleId;
         this.name = name;
     }
 
@@ -59,17 +60,17 @@ public class Location {
      *
      * @return article id
      */
-    public int getArticle_id() {
-        return article_id;
+    public int getArticleId() {
+        return articleId;
     }
 
     /**
      * Set this location's associated article's id
      *
-     * @param article_id sets the location id
+     * @param articleId sets the location id
      */
-    public void setArticle_id(int article_id) {
-        this.article_id = article_id;
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
     }
 
     /**
