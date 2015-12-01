@@ -1,5 +1,6 @@
 package io.zipcoder.controllers;
 
+import com.google.common.collect.Lists;
 import io.zipcoder.models.Article;
 import io.zipcoder.models.ArticleDAO;
 import org.hibernate.service.spi.InjectService;
@@ -8,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by emaron on 11/28/15.
@@ -29,6 +34,24 @@ public class ArticleController {
     @RequestMapping(value = "/article/readsingle", method = RequestMethod.GET)
     public Article readSingleArticle(int id) {
         return articleDAO.findOne(id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/article/findbyterm", method = RequestMethod.GET)
+    public ArrayList<Article> readAllWithTerm(String searchTerm) {
+        ArrayList<Article> allArticlesWithTerm = new ArrayList<>();
+        Iterator<Article> articles = articleDAO.findAll().iterator();
+
+        while(articles.hasNext()) {
+            Article article = articles.next();
+            if (article.getText().contains(searchTerm)) {
+                allArticlesWithTerm.add(article);
+            }
+        }
+
+
+        return allArticlesWithTerm;
+
     }
 
     @ResponseBody

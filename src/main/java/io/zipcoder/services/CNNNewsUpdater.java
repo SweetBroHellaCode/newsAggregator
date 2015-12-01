@@ -51,8 +51,6 @@ public class CNNNewsUpdater {
             //and organization object
             for (int i = 1; i < newsCNNArticles.length(); i++) {
 
-                System.out.println(i + ":");
-
                 //Make new Article for each CNN story
                 newsArticle = new Article(
                         newsCNNArticles.getJSONObject(i).get("title").toString(),
@@ -65,22 +63,14 @@ public class CNNNewsUpdater {
                         newsCNNArticles.getJSONObject(i).get("crawled").toString()
                 );
 
-                // System.out.println(newsArticle.getText());
 
                 //If text is not null and is not
                 //already present in database, then
                 //save to database
                 if (articleDAO.findByUrl(newsArticle.getUrl()) == null) {
-                    System.out.println(newsArticle.getName());
                     articleDAO.save(newsArticle);
-                } else {
-                    System.out.println("Duplicate value detected!");
                 }
 
-
-                //Make new Location article if applicable
-                System.out.println("Location: ");
-                System.out.println(newsCNNArticles.getJSONObject(i).getJSONArray("locations").length());
 
                 //If a story has a location object, then
                 //for each object, see if it exists in
@@ -96,7 +86,6 @@ public class CNNNewsUpdater {
                             );
 
                             locationDAO.save(newsArticleLocations);
-                            System.out.println(newsArticleLocations.getName());
                         }
                     }
 
@@ -116,7 +105,6 @@ public class CNNNewsUpdater {
                             );
 
                             organizationDAO.save(newsArticleOrganizations);
-                            System.out.println(newsArticleOrganizations.getName());
                         }
                     }
 
@@ -136,7 +124,7 @@ public class CNNNewsUpdater {
                             );
 
                             personsDAO.save(newsArticlePersons);
-                            System.out.println(newsArticlePersons.getName());
+
                         }
                     }
 
