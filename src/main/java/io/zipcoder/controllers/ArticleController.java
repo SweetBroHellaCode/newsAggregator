@@ -2,12 +2,8 @@ package io.zipcoder.controllers;
 
 import io.zipcoder.models.Article;
 import io.zipcoder.models.ArticleDAO;
-import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by emaron on 11/28/15.
@@ -63,5 +59,11 @@ public class ArticleController {
         if (tempArticle != null) {
             articleDAO.delete(tempArticle);
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/article/getbyname", method = RequestMethod.GET)
+    public Iterable<Article> getArticleByName() {
+        return articleDAO.findAll();
     }
 }
