@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by emaron on 11/28/15.
@@ -42,9 +44,12 @@ public class ArticleController {
         ArrayList<Article> allArticlesWithTerm = new ArrayList<>();
         Iterator<Article> articles = articleDAO.findAll().iterator();
 
+        Pattern patternSearchTerm = Pattern.compile(searchTerm, Pattern.CASE_INSENSITIVE);
+
         while(articles.hasNext()) {
             Article article = articles.next();
-            if (article.getText().contains(searchTerm)) {
+            Matcher patternSearchTermMatcher = patternSearchTerm.matcher(article.getText());
+            if (patternSearchTermMatcher.find()) {
                 allArticlesWithTerm.add(article);
             }
         }
