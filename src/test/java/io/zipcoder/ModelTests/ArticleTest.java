@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by emaron on 12/1/15.
  */
-public class DatabaseUpdateFactoryTest {
+public class ArticleTest {
 
     Article article;
     JSONObject jsonResponseBody;

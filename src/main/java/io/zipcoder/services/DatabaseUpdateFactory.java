@@ -29,7 +29,7 @@ public class DatabaseUpdateFactory {
     PersonsDAO personsDAO;
 
     @Async
-    public void updateNews(String newsOutlet) {
+    public void updateNews(String url) {
 
         //Request object variable
         HttpResponse<JsonNode> response = null;
@@ -41,47 +41,14 @@ public class DatabaseUpdateFactory {
         Persons newsArticlePersons;
 
         //Go to news site and pull all articles listed as news
-        if (newsOutlet.toUpperCase() == "CNN") {
-            try {
-                response = Unirest.get("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=cnn.com&site_type=news")
-                        .header("Accept", "application/json")
-                        .asJson();
-            } catch (UnirestException ex) {
-                System.out.println("ERROR: " + ex.getMessage());
-            }
-        } else if (newsOutlet.toUpperCase() == "MSNBC") {
-            try {
-                response = Unirest.get("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=msnbc.com&site_type=news")
-                        .header("Accept", "application/json")
-                        .asJson();
-            } catch (UnirestException ex) {
-                System.out.println("ERROR: " + ex.getMessage());
-            }
-        } else if (newsOutlet.toUpperCase() == "FOX") {
-            try {
-                response = Unirest.get("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=foxnews.com&site_type=news")
-                        .header("Accept", "application/json")
-                        .asJson();
-            } catch (UnirestException ex) {
-                System.out.println("ERROR: " + ex.getMessage());
-            }
-        } else if (newsOutlet.toUpperCase() == "ALJAZEERA") {
-            try {
-                response = Unirest.get("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=aljazeera.com&site_type=news")
-                        .header("Accept", "application/json")
-                        .asJson();
-            } catch (UnirestException ex) {
-                System.out.println("ERROR: " + ex.getMessage());
-            }
-        } else if (newsOutlet.toUpperCase() == "AP") {
-            try {
-                response = Unirest.get("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=ap.org&site_type=news")
-                        .header("Accept", "application/json")
-                        .asJson();
-            } catch (UnirestException ex) {
-                System.out.println("ERROR: " + ex.getMessage());
-            }
+        try {
+            response = Unirest.get(url)
+                    .header("Accept", "application/json")
+                    .asJson();
+        } catch (UnirestException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
         }
+
         //Convert new site's response to an Array
         JSONArray newsStoryArticles = response.getBody().getObject().getJSONArray("posts");
 

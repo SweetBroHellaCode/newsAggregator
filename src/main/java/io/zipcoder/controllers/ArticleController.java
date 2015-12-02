@@ -25,7 +25,6 @@ public class ArticleController {
     @Autowired
     private ArticleDAO articleDAO;
 
-
     @ResponseBody
     @RequestMapping(value = "/article/create", method = RequestMethod.GET)
     public void createArticle(Article newArticle) {

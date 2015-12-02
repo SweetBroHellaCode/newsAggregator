@@ -14,10 +14,10 @@ public class NewsUpdater {
 
     @Scheduled(fixedRate = 1000 * 60 * 60)
     public void updateDatabase() {
-        databaseUpdateFactory.updateNews("CNN");
-        databaseUpdateFactory.updateNews("MSNBC");
-        databaseUpdateFactory.updateNews("FOX");
-        databaseUpdateFactory.updateNews("AP");
-        databaseUpdateFactory.updateNews("ALJAZEERA");
+        databaseUpdateFactory.updateNews("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=cnn.com&site_type=news");
+        databaseUpdateFactory.updateNews("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=msnbc.com&site_type=news");
+        databaseUpdateFactory.updateNews("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=foxnews.com&site_type=news");
+        databaseUpdateFactory.updateNews("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=ap.org&site_type=news");
+        databaseUpdateFactory.updateNews("https://webhose.io/search?token=a600ee1f-6b6f-4c11-9ae4-42835aa5b3cc&format=json&q=news&site=aljazeera.com&site_type=news");
     }
 }
