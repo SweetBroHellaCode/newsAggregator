@@ -25,7 +25,6 @@ public class ArticleController {
     @Autowired
     private ArticleDAO articleDAO;
 
-
     @ResponseBody
     @RequestMapping(value = "/article/create", method = RequestMethod.GET)
     public void createArticle(Article newArticle) {
@@ -46,7 +45,7 @@ public class ArticleController {
 
         Pattern patternSearchTerm = Pattern.compile(searchTerm, Pattern.CASE_INSENSITIVE);
 
-        while(articles.hasNext()) {
+        while (articles.hasNext()) {
             Article article = articles.next();
             Matcher patternSearchTermMatcher = patternSearchTerm.matcher(article.getText());
             if (patternSearchTermMatcher.find()) {

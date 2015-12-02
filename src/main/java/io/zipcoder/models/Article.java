@@ -1,5 +1,7 @@
 package io.zipcoder.models;
 
+import org.json.JSONObject;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -8,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * Created by emaron on 11/25/15.
  */
 @Entity
-@Table(name= "article")
+@Table(name = "article")
 public class Article {
 
     // Table values
@@ -32,9 +34,8 @@ public class Article {
     @NotNull
     private String crawled;
 
-
     /**
-     * Constructor
+     * Constructor with all parameters available
      *
      * @param name
      * @param author
@@ -59,7 +60,27 @@ public class Article {
     /**
      * Default constructor
      */
-   public Article(){}
+    public Article() {
+    }
+
+    /**
+     * Take a JSON object and construct an Article
+     *
+     * @param object
+     * @return
+     */
+    public Article convertArticleFromJsonObject(JSONObject object) {
+        return new Article(
+                object.get("title").toString(),
+                object.get("author").toString(),
+                object.get("published").toString(),
+                object.get("url").toString(),
+                object.getJSONObject("thread").get("site_full").toString(),
+                object.get("title").toString(),
+                object.get("text").toString(),
+                object.get("crawled").toString()
+        );
+    }
 
     /**
      * Get id
