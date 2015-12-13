@@ -1,9 +1,7 @@
 package io.zipcoder.controllers;
 
-import com.google.common.collect.Lists;
 import io.zipcoder.models.Article;
 import io.zipcoder.models.ArticleDAO;
-import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +22,12 @@ public class ArticleController {
     @Autowired
     private ArticleDAO articleDAO;
 
+
+    @ResponseBody
+    @RequestMapping(value = "/article", method = RequestMethod.GET)
+    public Article showAllArticles() {
+        return articleDAO.findOne(1);
+    }
     @ResponseBody
     @RequestMapping(value = "/article/create", method = RequestMethod.GET)
     public void createArticle(Article newArticle) {
